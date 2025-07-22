@@ -1,4 +1,4 @@
-from libs.Requests.Request import Request
+from libs.requests.Request import Request
 from libs.sessions.Session import Session
 
 class SessionFactory:

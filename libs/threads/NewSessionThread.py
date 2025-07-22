@@ -4,7 +4,7 @@ import libs.constants as constants
 
 from threading import Thread, Lock
 
-from libs.Requests.Request import Request
+from libs.requests.Request import Request
 from libs.sessions.SessionFactory import SessionFactory
 from libs.sessions.SessionsLog import SessionsLog
 from libs.sessions.Session import Session

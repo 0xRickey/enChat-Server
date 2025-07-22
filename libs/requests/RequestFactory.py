@@ -1,6 +1,6 @@
 import json
 from libs.Decryptor import Decryptor
-from libs.Requests.Request import Request
+from libs.requests.Request import Request
 
 class RequestFactory:
     def __init__(self, decryptor: Decryptor):

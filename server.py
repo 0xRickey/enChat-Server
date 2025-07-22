@@ -2,7 +2,7 @@ import socket, sys, threading
 from libs.constants import MAX_BUFFER_SIZE_IN_BYTES, SERVER_IP_ADDR, SERVER_PORT
 from libs.KeyManager import KeyManager
 from libs.Decryptor import Decryptor
-from libs.Requests.RequestFactory import RequestFactory
+from libs.requests.RequestFactory import RequestFactory
 from libs.sessions.SessionsLog import SessionsLog
 from libs.response.ResponseLog import ResponseLog
 from libs.threads.ThreadFactory import ThreadFactory
