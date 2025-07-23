@@ -1,13 +1,14 @@
 import json
-from libs.Decryptor import Decryptor
 from libs.requests.Request import Request
 
 class RequestFactory:
-    def __init__(self, decryptor: Decryptor):
-        self.decryptor = decryptor
+    @staticmethod
+    def request_from_jsonstr(jsonStr: str) -> Request:
+        requestDict: dict = json.loads(jsonStr)
 
-    def extract_request(self, encrypted_request: bytes):
-        decrypted_request = self.decryptor.decrypt_message(encrypted_request)
-        request_dict: dict = json.loads(decrypted_request.decode())
-        
-        return Request(request_dict)
+        return Request(
+            command=requestDict["MESSAGE"]["COMMAND"],
+            payload=requestDict["MESSAGE"]["PAYLOAD"],
+            metadata=requestDict["MESSAGE"]["METADATA"],
+            signature=requestDict["SIGNATURE"]
+        )
