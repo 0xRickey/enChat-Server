@@ -22,12 +22,11 @@ class Server:
     def start_server(self):
         print("Server started")
         while True:
-            clientBytesMsg, clientSocketAddr = self.serverUdpSocket.recvfrom(MAX_BUFFER_SIZE_IN_BYTES)
+            encryptedRequest, clientSocketAddr = self.serverUdpSocket.recvfrom(MAX_BUFFER_SIZE_IN_BYTES)
             print(f"Message received from client {clientSocketAddr}")
 
-            # Extract the request from the message
-            print(f"Decrypting and extracting request from message...")
-            request = self.requestFactory.extract_request(clientBytesMsg)
+            print(f"Decrypting message...")
+            request = self.decryptor.decrypt_message(encryptedRequest)
 
             # check message integrity
             if not request.verify_integrity():
