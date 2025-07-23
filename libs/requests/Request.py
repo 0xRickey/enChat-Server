@@ -3,11 +3,20 @@ from libs.KeyManager import KeyManager
 from hashlib import sha256
 from cryptography.hazmat.primitives import serialization, hashes
 from cryptography.hazmat.primitives.asymmetric import padding
+from cryptography.hazmat.primitives.asymmetric.rsa import RSAPublicKey
 
 class Request:
-    def __init__(self, request_dict: dict):
-        self.message = request_dict["MESSAGE"]
-        self.signature = request_dict["SIGNATURE"]
+    def __init__(
+        self,
+        command: str,
+        payload: dict,
+        metadata: dict,
+        signature: str
+    ):
+        self.command = command
+        self.payload = payload
+        self.metadata = metadata
+        self.signature = signature
 
     def verify_integrity(self) -> bool:
         # Turn the message into a JSON string and then bytes
@@ -33,14 +42,14 @@ class Request:
             print(f"Error verifying integrity: {e}")
             return False
 
-    def get_command(self):
-        return self.message["COMMAND"]
+    def get_command(self) -> str:
+        return self.command
     
-    def get_payload(self):
-        return self.message["PAYLOAD"]
+    def get_payload(self) -> dict:
+        return self.payload
     
-    def get_metadata(self):
-        return self.message["METADATA"]
+    def get_metadata(self) -> dict:
+        return self.metadata
     
-    def get_signature(self):
+    def get_signature(self) -> str:
         return self.signature
