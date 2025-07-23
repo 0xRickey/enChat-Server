@@ -1,8 +1,7 @@
-import socket, sys, threading
+import socket, threading
 from libs.constants import MAX_BUFFER_SIZE_IN_BYTES, SERVER_IP_ADDR, SERVER_PORT
 from libs.KeyManager import KeyManager
 from libs.Decryptor import Decryptor
-from libs.requests.RequestFactory import RequestFactory
 from libs.sessions.SessionsLog import SessionsLog
 from libs.response.ResponseLog import ResponseLog
 from libs.Encryptor import Encryptor
@@ -16,7 +15,6 @@ class Server:
         self.keyManager = KeyManager()
         self.decryptor = Decryptor(self.keyManager)
         self.encryptor = Encryptor(self.keyManager)
-        self.requestFactory = RequestFactory(self.decryptor)
         self.responseLog = ResponseLog()
 
     def start_server(self):
