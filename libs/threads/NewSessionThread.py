@@ -13,18 +13,26 @@ from libs.response.Response import Response
 from libs.response.ResponseFactory import ResponseFactory
 from libs.KeyManager import KeyManager
 from libs.Encryptor import Encryptor
-from server import Server
 
 class NewSessionThread(Thread):
-    def __init__(self, request: Request, server: Server):
+    def __init__(
+        self,
+        request: Request,
+        threadLock: Lock,
+        serverUdpSocket: socket.socket,
+        sessionsLog: SessionsLog,
+        responseLog: ResponseLog,
+        keyManager: KeyManager,
+        encryptor: Encryptor
+    ):
         super().__init__()
         self.request: Request = request
-        self.threadLock: Lock = server.threadLock
-        self.serverUdpSocket: socket.socket = server.serverUdpSocket
-        self.sessionsLog: SessionsLog = server.sessionsLog
-        self.responseLog: ResponseLog = server.responseLog
-        self.keyManager: KeyManager = server.keyManager
-        self.encryptor: Encryptor = server.encryptor
+        self.threadLock: Lock = threadLock
+        self.serverUdpSocket: socket.socket = serverUdpSocket
+        self.sessionsLog: SessionsLog = sessionsLog
+        self.responseLog: ResponseLog = responseLog
+        self.keyManager: KeyManager = keyManager
+        self.encryptor: Encryptor = encryptor
 
     def run(self):
         with self.threadLock:

@@ -5,8 +5,8 @@ from libs.Decryptor import Decryptor
 from libs.requests.RequestFactory import RequestFactory
 from libs.sessions.SessionsLog import SessionsLog
 from libs.response.ResponseLog import ResponseLog
+from libs.Encryptor import Encryptor
 from libs.threads.ThreadFactory import ThreadFactory
-
 class Server:
     def __init__(self):
         self.serverUdpSocket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
@@ -15,6 +15,7 @@ class Server:
         self.sessionsLog = SessionsLog()
         self.keyManager = KeyManager()
         self.decryptor = Decryptor(self.keyManager)
+        self.encryptor = Encryptor(self.keyManager)
         self.requestFactory = RequestFactory(self.decryptor)
         self.responseLog = ResponseLog()
 
@@ -35,7 +36,15 @@ class Server:
 
             print("Message integrity check passed")
 
-            newThread = ThreadFactory.create_thread(request, self)
+            newThread = ThreadFactory.create_thread(
+                request,
+                self.threadLock,
+                self.serverUdpSocket,
+                self.sessionsLog,
+                self.responseLog,
+                self.keyManager,
+                self.encryptor
+            )
             newThread.start()
 
 if __name__ == "__main__":
