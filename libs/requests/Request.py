@@ -11,16 +11,20 @@ class Request:
         command: str,
         payload: dict,
         metadata: dict,
-        signature: str
+        signature: str,
+        pubKey: str,
+        init_vec: str
     ):
         self.command = command
         self.payload = payload
         self.metadata = metadata
         self.signature = signature
+        self.pubKey = pubKey
+        self.init_vec = init_vec
 
     def verify_integrity(self) -> bool:
         # Turn the message into a JSON string and then bytes
-        msg_hash = sha256(json.dumps(self.message).encode()).digest()
+        msg_hash = sha256(json.dumps(self.get_message()).encode()).hexdigest()
 
         # Verify the signature by using the public key and hash
         signer_pub_key = serialization.load_pem_public_key(
@@ -41,6 +45,13 @@ class Request:
         except Exception as e:
             print(f"Error verifying integrity: {e}")
             return False
+        
+    def get_message(self) -> dict:
+        return {
+            "COMMAND": self.command,
+            "PAYLOAD": self.payload,
+            "METADATA": self.metadata
+        }
 
     def get_command(self) -> str:
         return self.command
