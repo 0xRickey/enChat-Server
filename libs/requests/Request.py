@@ -23,8 +23,10 @@ class Request:
         self.init_vec = init_vec
 
     def verify_integrity(self) -> bool:
-        # Turn the message into a JSON string and then bytes
-        msg_hash = sha256(json.dumps(self.get_message()).encode()).hexdigest()
+        msgDict: dict = self.get_message()
+        msgDictJsonStr: str = json.dumps(msgDict)
+        msgDictBytes: bytes = msgDictJsonStr.encode()
+        msg_hash: bytes = sha256(msgDictBytes).hexdigest().encode()
 
         # Verify the signature by using the public key and hash
         signer_pub_key = serialization.load_pem_public_key(
@@ -33,7 +35,7 @@ class Request:
 
         try:
             signer_pub_key.verify(
-                self.signature,
+                self.signature.encode(),
                 msg_hash,
                 padding.PSS(
                     mgf=padding.MGF1(hashes.SHA256()),
