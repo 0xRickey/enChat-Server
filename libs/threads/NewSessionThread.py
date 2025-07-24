@@ -40,7 +40,7 @@ class NewSessionThread(Thread):
             self.sessionsLog.add_session(new_session)
 
             # create response
-            response: Response = ResponseFactory.create_response(
+            responseMsg: Response = ResponseFactory.create_response(
                 status=constants.START_SESSION_SUCCESS,
                 payload={
                     "SESSION_ID": new_session.get_session_id(),
@@ -51,19 +51,20 @@ class NewSessionThread(Thread):
                 keyManager=self.keyManager
             )
 
-            # update response log
-            self.responseLog.add_response(response)
-
-            # encrypt with session key (found in session object)
-            encrypted_response: bytes = self.encryptor.AES_encrypt(
-                response,
+            # encrypt message with session key (found in session object)
+            aesEncryptedResBytes: bytes = self.encryptor.AES_encrypt(
+                responseMsg,
                 new_session.get_session_key()
+                # init_vec field not included because we want the function to generate us one
             )
+
+            # update response log
+            self.responseLog.add_response(responseMsg)
 
             # send the encrypted response and
             # intitialisation vector to client via udp socket
             self.serverUdpSocket.sendto(
-                encrypted_response,
+                aesEncryptedResBytes,
                 self.request.get_address()
             )
 
