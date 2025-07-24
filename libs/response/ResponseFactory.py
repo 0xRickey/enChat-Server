@@ -1,6 +1,7 @@
 from cryptography.hazmat.primitives.asymmetric.rsa import RSAPublicKey
 
 from libs.response.Response import Response
+from libs.response.AesEncryptedResponse import AesEncryptedResponse
 from libs.KeyManager import KeyManager
 
 class ResponseFactory:
@@ -21,3 +22,7 @@ class ResponseFactory:
         rsaPubKey: RSAPublicKey = keyManager.get_public_key()
 
         return Response(status, payload, metadata, signature, rsaPubKey)
+
+    @staticmethod
+    def aes_encrypted_response(ciphertext: bytes, signature: bytes, init_vec: bytes):
+        return AesEncryptedResponse(ciphertext, signature, init_vec)
