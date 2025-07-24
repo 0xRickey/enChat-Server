@@ -3,7 +3,7 @@ class Session:
         self.session_id = session_id
         self.session_key = session_key
         self.server_next_nonce = 0
-        self.client_next_nonce = 0
+        self.client_next_nonce = 1
 
     def get_session_id(self):
         return self.session_id
