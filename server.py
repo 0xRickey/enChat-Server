@@ -1,4 +1,4 @@
-import socket, threading
+import socket, threading, json
 from libs.constants import MAX_BUFFER_SIZE_IN_BYTES, SERVER_IP_ADDR, SERVER_PORT
 from libs.KeyManager import KeyManager
 from libs.Decryptor import Decryptor
@@ -6,6 +6,8 @@ from libs.sessions.SessionsLog import SessionsLog
 from libs.response.ResponseLog import ResponseLog
 from libs.Encryptor import Encryptor
 from libs.threads.ThreadFactory import ThreadFactory
+from libs.requests.RequestFactory import RequestFactory
+
 class Server:
     def __init__(self):
         self.serverUdpSocket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
@@ -24,7 +26,9 @@ class Server:
             print(f"Message received from client {clientSocketAddr}")
 
             print(f"Decrypting message...")
-            request = self.decryptor.decrypt_message(encryptedRequest)
+            encryptedRequest = RequestFactory.encrypted_req_from_bytes(encryptedRequest)
+
+            request = self.decryptor.decrypt_request(encryptedRequest)
 
             # check message integrity
             if not request.verify_integrity():
