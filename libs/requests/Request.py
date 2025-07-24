@@ -29,9 +29,7 @@ class Request:
         msg_hash: bytes = sha256(msgDictBytes).hexdigest().encode()
 
         # Verify the signature by using the public key and hash
-        signer_pub_key = serialization.load_pem_public_key(
-            self.get_metadata()["PUBLIC_KEY"].encode()
-        )
+        signer_pub_key = serialization.load_pem_public_key(self.pubKey.encode())
 
         try:
             signer_pub_key.verify(
