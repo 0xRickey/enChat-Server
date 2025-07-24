@@ -2,13 +2,13 @@ import os, json
 
 import libs.constants as constants
 
-from cryptography.hazmat.primitives import hashes
-from cryptography.hazmat.primitives.asymmetric import padding
 from cryptography.hazmat.primitives.ciphers import Cipher, algorithms, modes
 from cryptography.hazmat.primitives import padding as padding_primitives
 
 from libs.KeyManager import KeyManager
 from libs.response.Response import Response
+from libs.response.AesEncryptedResponse import AesEncryptedResponse
+from libs.response.ResponseFactory import ResponseFactory
 
 class Encryptor:
     def __init__(self, keyManager: KeyManager):
@@ -46,10 +46,13 @@ class Encryptor:
         Returns:
             The encrypted response in bytes.
         """
+        responseMsg = response.get_message()
+        responseMsgBytes = json.dumps(responseMsg).encode()
+        
         # Load data into padder object and then call finalise to pad
         # the data to be a multiple of the block size
         padder = padding_primitives.PKCS7(constants.AES_BLOCK_SIZE_BITS).padder()
-        padded_data = padder.update(response.as_bytes()) + padder.finalize()
+        padded_data = padder.update(responseMsgBytes) + padder.finalize()
 
         # Create the AESCBC cipher object that will be
         # used to encrypt the data
@@ -59,11 +62,10 @@ class Encryptor:
         # Encrypt the data
         ciphertext = encryptor.update(padded_data) + encryptor.finalize()
 
-        AES_encrypted_response = {
-            "CIPHERTEXT": ciphertext,
-            "IV": init_vec.decode()
-        }
+        AES_encrypted_response = ResponseFactory.aes_encrypted_response(
+            ciphertext,
+            response.get_signature(),
+            init_vec
+        )
 
-        AES_encrypted_json_str = json.dumps(AES_encrypted_response)
-
-        return AES_encrypted_json_str.encode()
+        return AES_encrypted_response.as_bytes()
