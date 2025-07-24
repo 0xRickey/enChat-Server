@@ -1,5 +1,9 @@
-from cryptography.hazmat.primitives import serialization
-from cryptography.hazmat.primitives.asymmetric import rsa
+import json
+
+from hashlib import sha256
+
+from cryptography.hazmat.primitives import serialization, hashes
+from cryptography.hazmat.primitives.asymmetric import rsa, padding
 from cryptography.hazmat.primitives.asymmetric.rsa import RSAPrivateKey, RSAPublicKey
 
 class KeyManager:
@@ -31,8 +35,29 @@ class KeyManager:
                     format=serialization.PublicFormat.SubjectPublicKeyInfo
                 ))
 
+    def sign_message(self, msg: dict) -> str:
+        msgBytes = json.dumps(msg).encode()
+        msgHash  = sha256(msgBytes).hexdigest().encode()
+        
+        signature = self.private_key.sign(
+            msgHash,
+            padding.PSS(
+                mgf=padding.MGF1(hashes.SHA256()),
+                salt_length=padding.PSS.MAX_LENGTH
+            ),
+            hashes.SHA256()
+        )
+
+        return signature.hex()
+
     def get_private_key(self) -> RSAPrivateKey:
         return self.private_key
     
     def get_public_key(self) -> RSAPublicKey:
         return self.public_key
+    
+    def get_PEM_pub_key(self) -> str:
+        return self.public_key.public_bytes(
+            encoding=serialization.Encoding.PEM,
+            format=serialization.PublicFormat.SubjectPublicKeyInfo
+        ).decode()
