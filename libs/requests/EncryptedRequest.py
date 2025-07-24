@@ -6,17 +6,22 @@ class EncryptedRequest:
         self,
         ciphertext: str,
         signature: str,
-        publicKey: str
+        publicKey: str,
+        init_vec: str
     ):
         self.ciphertext = ciphertext,
         self.signature = signature,
-        self.publicKey = publicKey
+        self.publicKey = publicKey,
+        self.init_vec = init_vec
 
     def get_ciphertext(self) -> str:
         return self.ciphertext
     
     def get_signature(self) -> str:
         return self.signature
+    
+    def get_init_vec(self) -> str:
+        return self.init_vec
     
     def get_PEM_public_key(self) -> str:
         return self.publicKey
