@@ -46,6 +46,9 @@ class Encryptor:
         Returns:
             The encrypted response in bytes.
         """
+        # Need to do this because of the session log
+        response.set_init_vec(init_vec)
+
         responseMsg = response.get_message()
         responseMsgBytes = json.dumps(responseMsg).encode()
         
