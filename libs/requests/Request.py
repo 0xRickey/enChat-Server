@@ -35,7 +35,7 @@ class Request:
 
         try:
             signer_pub_key.verify(
-                self.signature.encode(),
+                bytes.fromhex(self.signature),
                 msg_hash,
                 padding.PSS(
                     mgf=padding.MGF1(hashes.SHA256()),
@@ -66,3 +66,6 @@ class Request:
     
     def get_signature(self) -> str:
         return self.signature
+    
+    def get_return_addr(self) -> tuple[str, int]:
+        return self.returnAddr
