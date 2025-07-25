@@ -10,6 +10,10 @@ class Session:
 
     def get_session_key(self):
         return self.session_key
+    
+    def get_expanded_session_key(self) -> bytes:
+        expandedKey: bytes = self.session_key.to_bytes(4, 'big') + b'\x00' * 12
+        return expandedKey
 
     def get_server_next_nonce(self):
         return self.server_next_nonce
