@@ -77,7 +77,7 @@ class Decryptor:
 
         init_vec = encryptedRequest.get_init_vec() # UTF-8 string of base64 bytes
         init_vec = init_vec.encode() # UTF-8 string or base64 bytes -> base64 bytes
-        init_vec = base64.decode(ciphertext) # base64 bytes -> original mumbo jumbo
+        init_vec = base64.b64decode(init_vec) # base64 bytes -> original mumbo jumbo
 
         aesCipher = Cipher(
             algorithm=algorithms.AES(sessionKey),
