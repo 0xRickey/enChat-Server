@@ -1,6 +1,7 @@
 import json
 from libs.requests.Request import Request
 from libs.requests.EncryptedRequest import EncryptedRequest
+from pprint import pprint
 
 class RequestFactory:
     @staticmethod
@@ -9,7 +10,7 @@ class RequestFactory:
         signature: str,
         pubKey: str,
         init_vec: str,
-        session_id: int,
+        sessionId: int,
         returnAddr: tuple[str, int]
     ) -> Request:
         msgJsonStr: str = msg.decode()
@@ -22,7 +23,7 @@ class RequestFactory:
             signature=signature,
             pubKey=pubKey,
             init_vec=init_vec,
-            session_id=session_id,
+            sessionId=sessionId,
             returnAddr=returnAddr
         )
 
@@ -55,6 +56,7 @@ class RequestFactory:
         returnAddr: tuple[str, int]
     ) -> EncryptedRequest:
         encryptedReqDict = json.loads(encryptedRequest.decode())
+        pprint(encryptedReqDict)
         return EncryptedRequest(
             encryptedReqDict["CIPHERTEXT"],
             encryptedReqDict["SIGNATURE"],
