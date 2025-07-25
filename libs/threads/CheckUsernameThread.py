@@ -42,8 +42,10 @@ class CheckUsernameThread(Thread):
             username: str = self.request.get_payload()["USERNAME"]
             
             if database.does_user_exist(username):
+                print(f"The username '{username}' is unavailable")
                 status = constants.USERNAME_TAKEN
             else:
+                print(f"The username '{username}' is available")
                 status = constants.USERNAME_AVAILABLE
 
             response: Response = ResponseFactory.create_response(
@@ -68,3 +70,5 @@ class CheckUsernameThread(Thread):
                 aesEncryptedResBytes,
                 self.request.get_return_addr()
             )
+
+            print("Response sent to client")
