@@ -43,7 +43,11 @@ class Decryptor:
         init_vec = encryptedRequest.get_init_vec()
 
         return RequestFactory.request_from_compressed_json(
-            reqJsonStr, signature, publicKey, init_vec
+            reqJsonStr,
+            signature,
+            publicKey,
+            init_vec,
+            encryptedRequest.get_return_addr()
         )
 
     def AES_decrypt(self, encryptedRequest: EncryptedRequest) -> Request:
