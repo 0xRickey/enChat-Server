@@ -13,8 +13,10 @@ class Decryptor:
 
     def decrypt_request(self, encryptedRequest: EncryptedRequest) -> Request:
         if encryptedRequest.get_init_vec() != "":
+            print("The Request is AES Encrypted, decrypting with associated session key...")
             return self.AES_decrypt(encryptedRequest)
         else:
+            print("The Request is RSA Encrypted, decrypting with server's private key...")
             return self.RSA_decrypt(encryptedRequest)
 
     def RSA_decrypt(self, encryptedRequest: EncryptedRequest) -> Request:
