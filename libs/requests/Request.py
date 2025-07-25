@@ -14,6 +14,7 @@ class Request:
         signature: str,
         pubKey: str,
         init_vec: str,
+        sessionId: int,
         returnAddr: tuple[str, int]
     ):
         self.command = command
@@ -22,6 +23,7 @@ class Request:
         self.signature = signature
         self.pubKey = pubKey
         self.init_vec = init_vec
+        self.sessionId = sessionId
         self.returnAddr = returnAddr
 
     def verify_integrity(self) -> bool:
@@ -69,3 +71,6 @@ class Request:
     
     def get_return_addr(self) -> tuple[str, int]:
         return self.returnAddr
+
+    def get_session_id(self) -> int:
+        return self.sessionId
