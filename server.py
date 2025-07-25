@@ -26,7 +26,7 @@ class Server:
             print(f"Message received from client {clientSocketAddr}")
 
             print(f"Decrypting message...")
-            encryptedRequest = RequestFactory.encrypted_req_from_bytes(encryptedRequest)
+            encryptedRequest = RequestFactory.encrypted_req_from_bytes(encryptedRequest, clientSocketAddr)
 
             request = self.decryptor.decrypt_request(encryptedRequest)
 
