@@ -26,6 +26,19 @@ class Request:
         self.sessionId = sessionId
         self.returnAddr = returnAddr
 
+    def as_dict(self):
+        return {
+            "MESSAGE": {
+                "COMMAND": self.command,
+                "PAYLOAD": self.payload,
+                "METADATA": self.metadata
+            },
+            "SIGNATURE": self.signature,
+            "PUBLIC_KEY": self.pubKey if self.pubKey else "",
+            "IV": self.init_vec if self.init_vec else "",
+            "SESSION_ID": self.sessionId if self.sessionId else ""
+        }
+
     def verify_integrity(self) -> bool:
         msgDict: dict = self.get_message()
         msgDictJsonStr: str = json.dumps(msgDict)
