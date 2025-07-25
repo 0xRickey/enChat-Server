@@ -35,6 +35,7 @@ class NewSessionThread(Thread):
         self.encryptor: Encryptor = encryptor
 
     def run(self):
+        print("Client initiated a start new session request")
         with self.threadLock:
             new_session: Session = SessionFactory.new_session(self.request)
             self.sessionsLog.add_session(new_session)
@@ -60,6 +61,8 @@ class NewSessionThread(Thread):
 
             # update response log
             self.responseLog.add_response(responseMsg)
+
+            print("New Session Registered, Sending a response back to client")
 
             # send the encrypted response and
             # intitialisation vector to client via udp socket
