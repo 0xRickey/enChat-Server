@@ -12,10 +12,10 @@ class Request:
         payload: dict,
         metadata: dict,
         signature: str,
-        pubKey: str,
-        init_vec: str,
-        sessionId: int,
-        returnAddr: tuple[str, int]
+        returnAddr: tuple[str, int],
+        pubKey: str = "",
+        init_vec: str = "",
+        sessionId: int = None,
     ):
         self.command = command
         self.payload = payload
