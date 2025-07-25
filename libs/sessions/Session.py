@@ -1,11 +1,11 @@
 class Session:
-    def __init__(self, session_id: str, session_key: bytes):
+    def __init__(self, session_id: int, session_key: int):
         self.session_id = session_id
         self.session_key = session_key
         self.server_next_nonce = 0
         self.client_next_nonce = 1
 
-    def get_session_id(self):
+    def get_session_id(self) -> int:
         return self.session_id
 
     def get_session_key(self):
