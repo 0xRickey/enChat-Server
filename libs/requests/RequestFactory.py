@@ -8,7 +8,8 @@ class RequestFactory:
         jsonStr: str,
         signature: str,
         pubKey: str,
-        init_vec: str
+        init_vec: str,
+        returnAddr: tuple[str, int]
     ) -> Request:
         msgDict: dict = json.loads(jsonStr)
         command = msgDict["C"]
@@ -21,15 +22,20 @@ class RequestFactory:
             metadata=metadata,
             signature=signature,
             pubKey=pubKey,
-            init_vec=init_vec
+            init_vec=init_vec,
+            returnAddr=returnAddr
         )
 
     @staticmethod
-    def encrypted_req_from_bytes(encryptedRequest: bytes) -> EncryptedRequest:
+    def encrypted_req_from_bytes(
+        encryptedRequest: bytes,
+        returnAddr: tuple[str, int]
+    ) -> EncryptedRequest:
         encryptedReqDict = json.loads(encryptedRequest.decode())
         return EncryptedRequest(
             encryptedReqDict["CIPHERTEXT"],
             encryptedReqDict["SIGNATURE"],
             encryptedReqDict["PUBLIC_KEY"],
-            encryptedReqDict["IV"]
+            encryptedReqDict["IV"],
+            returnAddr
         )
