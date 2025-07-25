@@ -55,7 +55,7 @@ class NewSessionThread(Thread):
             # encrypt message with session key (found in session object)
             aesEncryptedResBytes: bytes = self.encryptor.AES_encrypt(
                 responseMsg,
-                new_session.get_session_key()
+                new_session.get_expanded_session_key()
                 # init_vec field not included because we want the function to generate us one
             )
 
