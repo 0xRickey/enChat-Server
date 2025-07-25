@@ -7,12 +7,14 @@ class EncryptedRequest:
         ciphertext: str,
         signature: str,
         publicKey: str,
-        init_vec: str
+        init_vec: str,
+        returnAddr: tuple[str, int]
     ):
-        self.ciphertext = ciphertext,
-        self.signature = signature,
-        self.publicKey = publicKey,
+        self.ciphertext = ciphertext
+        self.signature = signature
+        self.publicKey = publicKey
         self.init_vec = init_vec
+        self.returnAddr = returnAddr
 
     def get_ciphertext(self) -> str:
         return self.ciphertext
@@ -34,3 +36,6 @@ class EncryptedRequest:
         return serialization.load_pem_public_key(
             self.publicKey.encode()
         )
+    
+    def get_return_addr(self) -> tuple[str, int]:
+        return self.returnAddr
