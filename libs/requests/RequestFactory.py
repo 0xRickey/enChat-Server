@@ -37,5 +37,6 @@ class RequestFactory:
             encryptedReqDict["SIGNATURE"],
             encryptedReqDict["PUBLIC_KEY"],
             encryptedReqDict["IV"],
+            encryptedReqDict["SESSION_ID"],
             returnAddr
         )
