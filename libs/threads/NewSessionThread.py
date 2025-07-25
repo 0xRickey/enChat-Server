@@ -68,7 +68,7 @@ class NewSessionThread(Thread):
             # intitialisation vector to client via udp socket
             self.serverUdpSocket.sendto(
                 aesEncryptedResBytes,
-                self.request.get_address()
+                self.request.get_return_addr()
             )
 
             
