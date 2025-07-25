@@ -8,12 +8,14 @@ class EncryptedRequest:
         signature: str,
         publicKey: str,
         init_vec: str,
+        session_id: int,
         returnAddr: tuple[str, int]
     ):
         self.ciphertext = ciphertext
         self.signature = signature
         self.publicKey = publicKey
         self.init_vec = init_vec
+        self.session_id = session_id
         self.returnAddr = returnAddr
 
     def get_ciphertext(self) -> str:
@@ -39,3 +41,6 @@ class EncryptedRequest:
     
     def get_return_addr(self) -> tuple[str, int]:
         return self.returnAddr
+
+    def get_session_id(self) -> int:
+        return self.session_id
