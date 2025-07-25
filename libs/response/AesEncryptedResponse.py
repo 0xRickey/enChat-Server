@@ -10,7 +10,7 @@ class AesEncryptedResponse:
         return self.as_json_str().encode()
 
     def as_json_str(self) -> str:
-        return json.loads(self.as_dict()) 
+        return json.dumps(self.as_dict()) 
 
     def as_dict(self) -> dict:
         return {
