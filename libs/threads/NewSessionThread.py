@@ -71,4 +71,4 @@ class NewSessionThread(Thread):
                 self.request.get_return_addr()
             )
 
-            
+        print("Response sent to client")
