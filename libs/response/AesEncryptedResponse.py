@@ -1,5 +1,4 @@
-import json
-from libs.response.Response import Response
+import json, base64
 
 class AesEncryptedResponse:
     def __init__(self, ciphertext: bytes, signature: bytes, init_vec: bytes):
@@ -15,8 +14,8 @@ class AesEncryptedResponse:
 
     def as_dict(self) -> dict:
         return {
-            "CIPHERTEXT": self.ciphertext.decode(),
+            "CIPHERTEXT": base64.b64encode(self.ciphertext).decode('utf-8'),
             "SIGNATURE": self.signature.decode(),
             "PUBLIC_KEY": "",
-            "IV": self.init_vec.decode()
+            "IV": base64.b64encode(self.init_vec).decode('utf-8')
         }
