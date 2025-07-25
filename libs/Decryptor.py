@@ -8,8 +8,6 @@ from cryptography.hazmat.primitives import padding as padding_primitives
 from cryptography.hazmat.primitives import hashes
 
 from libs.KeyManager import KeyManager
-from cryptography.hazmat.primitives.asymmetric import padding
-from cryptography.hazmat.primitives import hashes
 from libs.requests.Request import Request
 from libs.requests.EncryptedRequest import EncryptedRequest
 from libs.requests.RequestFactory import RequestFactory
