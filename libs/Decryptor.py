@@ -1,4 +1,11 @@
-import base64
+import base64, json
+
+import libs.constants as constants
+
+from cryptography.hazmat.primitives.ciphers import Cipher, algorithms, modes
+from cryptography.hazmat.primitives.asymmetric import padding as padding_asymmetric
+from cryptography.hazmat.primitives import padding as padding_primitives
+from cryptography.hazmat.primitives import hashes
 
 from libs.KeyManager import KeyManager
 from cryptography.hazmat.primitives.asymmetric import padding
@@ -30,8 +37,8 @@ class Decryptor:
 
         decryptedRequest = self.keyManager.get_private_key().decrypt(
             ciphertext,
-            padding.OAEP(
-                mgf=padding.MGF1(algorithm=hashes.SHA256()),
+            padding_asymmetric.OAEP(
+                mgf=padding_asymmetric.MGF1(algorithm=hashes.SHA256()),
                 algorithm=hashes.SHA256(),
                 label=None
             )
