@@ -13,7 +13,8 @@ class Request:
         metadata: dict,
         signature: str,
         pubKey: str,
-        init_vec: str
+        init_vec: str,
+        returnAddr: tuple[str, int]
     ):
         self.command = command
         self.payload = payload
@@ -21,6 +22,7 @@ class Request:
         self.signature = signature
         self.pubKey = pubKey
         self.init_vec = init_vec
+        self.returnAddr = returnAddr
 
     def verify_integrity(self) -> bool:
         msgDict: dict = self.get_message()
