@@ -2,7 +2,30 @@ import json
 from libs.requests.Request import Request
 from libs.requests.EncryptedRequest import EncryptedRequest
 
-class RequestFactory:    
+class RequestFactory:
+    @staticmethod
+    def request_from_bytes(
+        msg: bytes,
+        signature: str,
+        pubKey: str,
+        init_vec: str,
+        session_id: int,
+        returnAddr: tuple[str, int]
+    ) -> Request:
+        msgJsonStr: str = msg.decode()
+        msgDict: dict = json.loads(msgJsonStr)
+        
+        return Request(
+            command=msgDict["COMMAND"],
+            payload=msgDict["PAYLOAD"],
+            metadata=msgDict["METADATA"],
+            signature=signature,
+            pubKey=pubKey,
+            init_vec=init_vec,
+            session_id=session_id,
+            returnAddr=returnAddr
+        )
+
     @staticmethod
     def request_from_compressed_json(
         jsonStr: str,
