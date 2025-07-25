@@ -1,1 +1,8 @@
-{}
+{
+    "USERS": {
+        "HelloWorld123": {
+            "SALT": "BLAH BLAH BLAH",
+            "PASSWORD": "SHA256(SALT || PASSWORD)"
+        }
+    }
+}
