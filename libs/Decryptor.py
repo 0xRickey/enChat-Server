@@ -1,4 +1,5 @@
-import json
+import base64
+
 from libs.KeyManager import KeyManager
 from cryptography.hazmat.primitives.ciphers import Cipher, algorithms, modes
 from cryptography.hazmat.primitives import padding
@@ -24,9 +25,12 @@ class Decryptor:
         Decrypts the encrypted request using the server's
         RSA private key.
         """
-        ciphertext = encryptedRequest.get_ciphertext()
+        ciphertext = base64.b64decode(
+            encryptedRequest.get_ciphertext().encode('utf-8')
+        )
+
         decryptedRequest = self.keyManager.get_private_key().decrypt(
-            ciphertext.encode(),
+            ciphertext,
             padding.OAEP(
                 mgf=padding.MGF1(algorithm=hashes.SHA256()),
                 algorithm=hashes.SHA256(),
