@@ -67,7 +67,7 @@ class Encryptor:
 
         AES_encrypted_response = ResponseFactory.aes_encrypted_response(
             ciphertext,
-            response.get_signature(),
+            response.get_signature().encode(),
             init_vec
         )
 
