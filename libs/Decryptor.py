@@ -13,15 +13,21 @@ from cryptography.hazmat.primitives import hashes
 from libs.requests.Request import Request
 from libs.requests.EncryptedRequest import EncryptedRequest
 from libs.requests.RequestFactory import RequestFactory
+from libs.sessions.Session import Session
+from libs.sessions.SessionsLog import SessionsLog
 
 class Decryptor:
-    def __init__(self, keyManager: KeyManager):
+    def __init__(self, keyManager: KeyManager, sessionsLog: SessionsLog):
         self.keyManager = keyManager
+        self.sessionsLog = sessionsLog
 
     def decrypt_request(self, encryptedRequest: EncryptedRequest) -> Request:
         if encryptedRequest.get_init_vec() != "":
             print("The Request is AES Encrypted, decrypting with associated session key...")
-            return self.AES_decrypt(encryptedRequest)
+            sessionId: int = encryptedRequest.get_session_id()
+            session: Session = self.sessionsLog.get_session(sessionId)
+            sessionKey: bytes = session.get_expanded_session_key()
+            return self.AES_decrypt(encryptedRequest, sessionKey)
         else:
             print("The Request is RSA Encrypted, decrypting with server's private key...")
             return self.RSA_decrypt(encryptedRequest)
