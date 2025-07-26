@@ -23,9 +23,8 @@ class Server:
         print("Server started")
         while True:
             encryptedRequest, clientSocketAddr = self.serverUdpSocket.recvfrom(MAX_BUFFER_SIZE_IN_BYTES)
-            print(f"Message received from client {clientSocketAddr}")
+            print(f"\nMessage received from client {clientSocketAddr}")
 
-            print(f"Decrypting message...")
             encryptedRequest = RequestFactory.encrypted_req_from_bytes(encryptedRequest, clientSocketAddr)
 
             request = self.decryptor.decrypt_request(encryptedRequest)
