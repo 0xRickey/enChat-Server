@@ -7,6 +7,7 @@ from threading import Lock
 from libs.requests.Request import Request
 from libs.threads.NewSessionThread import NewSessionThread
 from libs.threads.CheckUsernameThread import CheckUsernameThread
+from libs.threads.RegisterUserThread import RegisterUserThread
 from libs.sessions.SessionsLog import SessionsLog
 from libs.response.ResponseLog import ResponseLog
 from libs.KeyManager import KeyManager
@@ -36,6 +37,16 @@ class ThreadFactory:
                 )
             case constants.CHECK_USERNAME:
                 return CheckUsernameThread(
+                    request,
+                    threadLock,
+                    serverUdpSocket,
+                    sessionsLog,
+                    responseLog,
+                    keyManager,
+                    encryptor
+                )
+            case constants.REGISTER_USER:
+                return RegisterUserThread(
                     request,
                     threadLock,
                     serverUdpSocket,
