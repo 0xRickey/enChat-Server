@@ -99,8 +99,6 @@ class Decryptor:
         unpadder = padding_primitives.PKCS7(constants.AES_BLOCK_SIZE_BITS).unpadder()
 
         msgJsonBytes: bytes = unpadder.update(paddedMsg) + unpadder.finalize()
-        msgJsonStr: str = msgJsonBytes.decode()
-        msg: dict = json.loads(msgJsonStr)
 
         request = RequestFactory.request_from_bytes(
             msgJsonBytes,
