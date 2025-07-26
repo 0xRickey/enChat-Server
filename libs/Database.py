@@ -21,3 +21,7 @@ class Database:
             "SALT": salt,
             "PASSWORD": saltedPwdHash
         }
+
+    def write_to_db(self):
+        with open("database.json", "w") as f:
+            f.write(json.dumps({"USERS": self.users}, indent=4))
