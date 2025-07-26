@@ -15,7 +15,7 @@ class Database:
         # Generate 32 random bytes to use a password salt
         salt: str = os.urandom(THIRTY_TWO_BYTES).hex()
         saltedPassword: str = salt + password
-        saltedPwdHash: str = hashlib.sha256(saltedPassword).hexdigest()
+        saltedPwdHash: str = hashlib.sha256(saltedPassword.encode()).hexdigest()
 
         self.users[username] = {
             "SALT": salt,
