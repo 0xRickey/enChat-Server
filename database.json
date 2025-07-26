@@ -1,8 +1,16 @@
 {
     "USERS": {
-        "HelloWorld123": {
-            "SALT": "BLAH BLAH BLAH",
-            "PASSWORD": "SHA256(SALT || PASSWORD)"
+        "abc": {
+            "SALT": "d9813ce24adfcc3aa2dab363a764692825ae287e2553af5b300ec491f6c63c2c",
+            "PASSWORD": "ddf2c77e6f0f7b426e04e47823f81986126f340709ec070678b8ad73775d05a8"
+        },
+        "Rickey_Lin": {
+            "SALT": "17d09df785a535ea0025c59a0bffe8e519ae647680883441b3f838abae6593b5",
+            "PASSWORD": "d0ef173a6bd07e0f1d74e7afeb772a70cc68e3c13ffb26d95256ab807d606193"
+        },
+        "hello_there": {
+            "SALT": "b4e199c898dd4d8b8e3b6d84c84e902124dd602082c6c22ec4b97c5df96e4afe",
+            "PASSWORD": "31e174c722c0b2a1ac00bb8be2e8f32ac5433f1542b12f90551d3a2625fd82b3"
         }
     }
 }
