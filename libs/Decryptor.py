@@ -6,6 +6,7 @@ from cryptography.hazmat.primitives.ciphers import Cipher, algorithms, modes
 from cryptography.hazmat.primitives.asymmetric import padding as padding_asymmetric
 from cryptography.hazmat.primitives import padding as padding_primitives
 from cryptography.hazmat.primitives import hashes
+from pprint import pprint
 
 from libs.KeyManager import KeyManager
 from libs.requests.Request import Request
@@ -20,15 +21,22 @@ class Decryptor:
         self.sessionsLog = sessionsLog
 
     def decrypt_request(self, encryptedRequest: EncryptedRequest) -> Request:
+        print("Beginning decryption process")
         if encryptedRequest.get_init_vec() != "":
             print("The Request is AES Encrypted, decrypting with associated session key...")
             sessionId: int = encryptedRequest.get_session_id()
             session: Session = self.sessionsLog.get_session(sessionId)
             sessionKey: bytes = session.get_expanded_session_key()
-            return self.AES_decrypt(encryptedRequest, sessionKey)
+            decryptedRequest = self.AES_decrypt(encryptedRequest, sessionKey)
         else:
             print("The Request is RSA Encrypted, decrypting with server's private key...")
-            return self.RSA_decrypt(encryptedRequest)
+            decryptedRequest = self.RSA_decrypt(encryptedRequest)
+        
+        print("Decryption complete! Here is what was received: ")
+        pprint(decryptedRequest.as_dict())
+
+        return decryptedRequest
+        
 
     def RSA_decrypt(self, encryptedRequest: EncryptedRequest) -> Request:
         """
