@@ -22,6 +22,13 @@ class Database:
             "PASSWORD": saltedPwdHash
         }
 
+    def try_user_login(self, username: str, password: str):
+        salt: str = self.users[username]["SALT"]
+        saltedPassword: str = salt + password
+        saltedPwdHash: str = hashlib.sha256(saltedPassword.encode()).hexdigest()
+
+        return saltedPwdHash == self.users[username]["PASSWORD"]
+
     def write_to_db(self):
         with open("database.json", "w") as f:
             f.write(json.dumps({"USERS": self.users}, indent=4))
