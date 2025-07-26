@@ -15,7 +15,7 @@ class Server:
         self.threadLock = threading.Lock()
         self.sessionsLog = SessionsLog()
         self.keyManager = KeyManager()
-        self.decryptor = Decryptor(self.keyManager)
+        self.decryptor = Decryptor(self.keyManager, self.sessionsLog)
         self.encryptor = Encryptor(self.keyManager)
         self.responseLog = ResponseLog()
 
