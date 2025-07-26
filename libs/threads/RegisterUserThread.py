@@ -42,6 +42,7 @@ class RegisterUserThread(Thread):
             
             database: Database = Database()
             database.add_user(username, password)
+            database.write_to_db()
 
             response: Response = ResponseFactory.create_response(
                 status=constants.REGISTER_USER_SUCCESS,
@@ -66,5 +67,6 @@ class RegisterUserThread(Thread):
                 self.request.get_return_addr()
             )
 
-            print("Response sent to client")
+            print("Successfully added user's new account")
+            print("Sending a response back to the client")
 
