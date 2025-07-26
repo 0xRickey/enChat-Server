@@ -8,4 +8,4 @@ class Database:
         self.users: dict = database["USERS"]
 
     def does_user_exist(self, username: str):
-        return username in self.users
+        return username in self.users.keys()
