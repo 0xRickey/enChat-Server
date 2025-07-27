@@ -10,7 +10,7 @@ class Database:
     def does_user_exist(self, username: str):
         return username in self.users.keys()
     
-    def add_user(self, username: str, password: str):
+    def add_user(self, username: str, password: str, pubKey: str):
         THIRTY_TWO_BYTES = 32
         # Generate 32 random bytes to use a password salt
         salt: str = os.urandom(THIRTY_TWO_BYTES).hex()
@@ -19,7 +19,8 @@ class Database:
 
         self.users[username] = {
             "SALT": salt,
-            "PASSWORD": saltedPwdHash
+            "PASSWORD": saltedPwdHash,
+            "PUBLIC_KEY": pubKey
         }
 
     def try_user_login(self, username: str, password: str):
