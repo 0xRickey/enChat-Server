@@ -3,6 +3,7 @@ import time, socket
 import libs.constants as constants
 
 from threading import Thread, Lock
+from pprint import pprint
 
 from libs.requests.Request import Request
 from libs.sessions.SessionsLog import SessionsLog
@@ -47,12 +48,14 @@ class LogoutThread(Thread):
                 metadata={},
                 keyManager=self.keyManager
             )
+            print("Response for the EXIT command:")
+            pprint(response.as_dict())
 
             self.responseLog.add_response(response)
 
             rsaEncryptedResBytes: bytes = self.encryptor.RSA_encrypt(
                 response=response,
-                PEM_pub_key=response.get_PEM_pub_key()
+                PEM_pub_key=self.request.get_PEM_pub_key()
             )
 
             self.serverUdpSocket.sendto(
