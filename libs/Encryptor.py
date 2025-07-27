@@ -2,6 +2,8 @@ import os, json
 
 import libs.constants as constants
 
+from pprint import pprint
+
 from cryptography.hazmat.primitives.ciphers import Cipher, algorithms, modes
 from cryptography.hazmat.primitives import hashes, serialization
 from cryptography.hazmat.primitives import padding as padding_primitives
@@ -11,6 +13,7 @@ from cryptography.hazmat.primitives.asymmetric.rsa import RSAPublicKey
 from libs.KeyManager import KeyManager
 from libs.response.Response import Response
 from libs.response.AesEncryptedResponse import AesEncryptedResponse
+from libs.response.RsaEncryptedResponse import RsaEncryptedResponse
 from libs.response.ResponseFactory import ResponseFactory
 
 class Encryptor:
@@ -26,15 +29,30 @@ class Encryptor:
         Returns:
             The encrypted response in bytes.
         """
-        recipientPubKey: RSAPublicKey = serialization.load_pem_public_key(PEM_pub_key)
-        return recipientPubKey.encrypt(
-            response.as_bytes(),
+        print("\nEncrypting response...")
+        msgToEncrypt: dict = response.get_message()
+        msgJsonStr: str = json.dumps(msgToEncrypt)
+        msgAsbytes: bytes = msgJsonStr.encode('utf-8')
+
+        recipientPubKey: RSAPublicKey = serialization.load_pem_public_key(PEM_pub_key.encode())
+        ciphertext = recipientPubKey.encrypt(
+            msgAsbytes,
             padding_asymmetric.OAEP(
                 mgf=padding_asymmetric.MGF1(algorithm=hashes.SHA256()),
                 algorithm=hashes.SHA256(),
                 label=None
             )
         )
+
+        fullResponse = ResponseFactory.rsa_encrypted_response(
+            ciphertext,
+            response.get_signature(),
+            self.keyManager.get_PEM_pub_key()
+        )
+        print("Response Encrypted")
+        pprint(fullResponse.as_dict())
+
+        return fullResponse.as_bytes()
 
     def AES_encrypt(self,
         response: Response,
