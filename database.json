@@ -10,5 +10,35 @@
             "PASSWORD": "ef4ab19f15f0efa8315e325754334632dee2089755d22274363ec5f1a3011376",
             "PUBLIC_KEY": "-----BEGIN PUBLIC KEY-----\nMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAjq8B3IO4QJT4tcznb1Fy\nWNTROW5KEGCtauu5NNL5wa6WxYSB4uChfGmzzR9MPuiergfGx+9HXIOSH5AiLzoq\nbTbxfv01c6kA/T6+tXUUG9w8bZ3Uu2+5IACUNE4/UuxpE78DCSMQ4HGZQOtNriUL\nxcSy3P2jGUUz7XJKoEhGzWYP9yZxYSUMxAUJrLXlOVLvlCsqeTwHe65boyK2ITuZ\nPRlpgnAOyLF9BKTnLZllpaqJRkpFOxtlSQ2aQS/6vRQ3FvBM+IcfU4b0yuvKcEm1\n26NHMvzdnxIfe5N05wvt5wUXE/WwUgFmxi76urkCstk8BptWHj4/6KTH8i02uAs5\n6wIDAQAB\n-----END PUBLIC KEY-----\n"
         }
+    },
+    "CHATS": {
+        "HelloWorld-RickeyLin": [
+            {
+                "MESSAGE": "HelloWorld: UWGFNLb3W8Ff9zCeRX3M8lFmAvU7UdBviqWLIgwnfgRYxIfOkN54twDFcy7tHPYXd2bUiUMXtkyoZiorBQzuismOEaPLL7c47CBZyHuDP5f48z7jugb3vAuzzr8bzJxO5Tb4HMNUT3q/GM3y0puWHTfvFCkNbtPTfbzCIoVQKWrEWe1gdiOcv2ggkTGlRm3zzvzo9UMGaa+krllHrIL/d+o6FjFYp5AWmddgNAtlRbd8o5UJCGw2YX6EofV2o+MqY8GKviSZ2k2MQGtypqW81ZWh2e3CfAWrlQn7kfixJIk5VtX8PRa5WOCnkw8uE1V/zsRw88+bEWQpg4yI8C2duw==",
+                "TIMESTAMP": 1753616018
+            },
+            {
+                "MESSAGE": "HelloWorld: AgyeNApvMlS8a2PSUL42yq33iWlEiCZ40hsuMOsHar0ZXAAarfhI7/3BaDk4VG2AHT1Wrb9oJ4Oz801Xcq856EzZSALqsh+R5qIBdoYaiDHWf2Gb07uhyqACtrqslySpMxls+7QZ+nxsW1bvr4Apfw3s2VpwPARWP505niSTqdVmWTQje3jvcfNLacrZZ/4ek2I60o292bWz0Riaugd10Rbe+bATp/ZdMLLhmoxSXx5MOxUxkVUoveUJe5bmjXq1rt6399VEw7ICXfQQRviu55ffPD3wsHzEO+xU+XUjrspsx+f4gpEM8u/z1goMjjJ1u80wAHQaGVC2TVtdF+RocA==",
+                "TIMESTAMP": 1753617025
+            },
+            {
+                "MESSAGE": "HelloWorld: WXD91D81JhHRzdddhqFA8YS8JMNCR0uW7joZWWDSKHo/6Fkk1SPU8dFLbwM0AmHrILn4OnRtIYsZoLeGyXdR7HogW0RkX3vHdihcS7zagn0ue4fmZU30s1ug66xvpXJVotcs3ya36tQ4AkMHzxkk6Q8qJbWYEQdY4lD0SfTU6+WItFcT1pMWnYf2VPB/wVsCwyRZaKIj75Jv5YiKYa9YFwQ2K12Yw6J4P91B3PrRV3Vgi2/TZg6pB4HwJPapkDDhfp3EYA2kJvsRBvXXzSps59+aLma5tLOsPOF7Kzaqx9jitl1bayCoHvPv99K1mn3QT+afP8OQGxzcF0DW2vYI/A==",
+                "TIMESTAMP": 1753617073
+            },
+            {
+                "MESSAGE": "HelloWorld: PGONIVpwbo2awRtFgIas2BygQr6WFeQ6QtgUgxIrMONGYBDAthSW565WchqS/x+3C8t1xDFYjA7B+L26RvzYieTo6zevJx3Z61tn9mBhtSS1nmTIuFqMJS4OZjNANkyMNpM6YO8T7bfIp0reN/8Nm2HeFB1mqkdl5EtSUUPUuXCULRQXKIzB+QLRZyiptAGcQqZLeyCUnck4GSs+0FGmUV+AsUBlWlFPuB0OkC8e3kajJemdE8HB9egG9qJ9uKBiwoue+QwlmZVoz0vpdIXHDMgSOnBtOCPIehOoDrRuGDm2Fvk4ZfFiFo8nPaR4zmQHJ7xTgV7joVUf+TlPggyY1Q==",
+                "TIMESTAMP": 1753617084
+            }
+        ],
+        "RickeyLin-HelloWorld": [
+            {
+                "MESSAGE": "RickeyLin: f1rP3GhpOIQgcLMq7fjvWpbQVXi7HaW/vIGS5xvQqm8Zb88j0D1Ir1NFwVQTPBJKECor3D3Qa36HeQ2YcFIqEoxFfqbIu4MbRHemrd1g/fLCv3lD9kerka6mmxqT51JYZULBBWKmwb0FlI8uM0w2kZXHtdgD94f4QqyttzBbpKa9JVtUcM2dkvPwvSXs+bdHcgP+ICnFqm3CyzoiRAg8roZ0Osc0IYXfQboj0NDDCvbcyr5Xw9bq4qWSM3Osw0ElJ4WGT+tyjyo9484hJcT5juIfJivS9VWxRPdWUaGRIuvpjDzUHw1oU0lXaMNJLPxnuL+3EaSZHzLbx05DkmwTPQ==",
+                "TIMESTAMP": 1753616055
+            },
+            {
+                "MESSAGE": "RickeyLin: X7WtA2sDYqqZbsjyRMPmqcqGwHuD6Q5oj+bsBK0fBo63Vz8j4p6ezenPFz0MgCQhsRA9ja8fcCkVCUkMpszdNSeiw4EnlATrNwcV00JB3MEa4lBhV4WnxnEDKEOiBmT+Fm44daCJDDC8zqNQNWhPzYxIBki3W/sU+whoYi7JvdTkpm6ZSGBsLRc55BqzvoPeJgEFPcJVMaXTxJWevtZNWpA7mUzU7xY7y6uHDkBFmKIOkqsJHw2lFuG89ljT4nhJFbuSS6/0fu42X1A8WCrrFMBIgS8Q/eXHKymydTAnLJFGkow1kpafWfQ/vw+QApDZUavuJAMatzmLhfS5wZeq+A==",
+                "TIMESTAMP": 1753617118
+            }
+        ]
     }
 }
