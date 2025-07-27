@@ -14,7 +14,7 @@ from libs.KeyManager import KeyManager
 from libs.Encryptor import Encryptor
 from libs.Database import Database
 
-class LoginThread(Thread):
+class LogoutThread(Thread):
     def __init__(
         self,
         request: Request,
