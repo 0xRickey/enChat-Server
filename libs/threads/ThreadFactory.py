@@ -89,5 +89,15 @@ class ThreadFactory:
                     keyManager,
                     encryptor
                 )
+            case constants.MSG:
+                return MsgThread(
+                    request,
+                    threadLock,
+                    serverUdpSocket,
+                    sessionsLog,
+                    responseLog,
+                    keyManager,
+                    encryptor
+                )
             case _:
                 return
