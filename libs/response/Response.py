@@ -70,7 +70,7 @@ class Response:
         return {
             "MESSAGE": self.get_message(),
             "SIGNATURE": self.signature,
-            "PUBLIC_KEY": self.pubKey,
+            "PUBLIC_KEY": self.get_PEM_pub_key(),
             "IV": self.init_vec
         }
 
