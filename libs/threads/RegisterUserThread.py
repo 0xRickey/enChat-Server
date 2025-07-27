@@ -39,9 +39,10 @@ class RegisterUserThread(Thread):
         with self.threadLock:
             username: str = self.request.get_payload()["USERNAME"]
             password: str = self.request.get_payload()["PASSWORD"]
+            pubKey: str = self.request.get_PEM_pub_key()
             
             database: Database = Database()
-            database.add_user(username, password)
+            database.add_user(username, password, pubKey)
             database.write_to_db()
 
             response: Response = ResponseFactory.create_response(
