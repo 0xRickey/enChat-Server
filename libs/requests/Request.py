@@ -87,3 +87,6 @@ class Request:
 
     def get_session_id(self) -> int:
         return self.sessionId
+    
+    def get_PEM_pub_key(self) -> str:
+        return self.pubKey
