@@ -9,6 +9,7 @@ from libs.threads.NewSessionThread import NewSessionThread
 from libs.threads.CheckUsernameThread import CheckUsernameThread
 from libs.threads.RegisterUserThread import RegisterUserThread
 from libs.threads.LoginThread import LoginThread
+from libs.threads.LogoutThread import LogoutThread
 from libs.sessions.SessionsLog import SessionsLog
 from libs.response.ResponseLog import ResponseLog
 from libs.KeyManager import KeyManager
@@ -58,6 +59,16 @@ class ThreadFactory:
                 )
             case constants.LOGIN:
                 return LoginThread(
+                    request,
+                    threadLock,
+                    serverUdpSocket,
+                    sessionsLog,
+                    responseLog,
+                    keyManager,
+                    encryptor
+                )
+            case constants.EXIT:
+                return LogoutThread(
                     request,
                     threadLock,
                     serverUdpSocket,
