@@ -3,7 +3,10 @@ import os, json
 import libs.constants as constants
 
 from cryptography.hazmat.primitives.ciphers import Cipher, algorithms, modes
+from cryptography.hazmat.primitives import hashes, serialization
 from cryptography.hazmat.primitives import padding as padding_primitives
+from cryptography.hazmat.primitives.asymmetric import padding as padding_asymmetric
+from cryptography.hazmat.primitives.asymmetric.rsa import RSAPublicKey
 
 from libs.KeyManager import KeyManager
 from libs.response.Response import Response
@@ -23,16 +26,16 @@ class Encryptor:
         Returns:
             The encrypted response in bytes.
         """
-        # return self.keyManager.get_public_key().encrypt(
-        #     response.as_bytes(),
-        #     padding.OAEP(
-        #         mgf=padding.MGF1(algorithm=hashes.SHA256()),
-        #         algorithm=hashes.SHA256(),
-        #         label=None
-        #     )
-        # )
-        pass
-    
+        recipientPubKey: RSAPublicKey = serialization.load_pem_public_key(PEM_pub_key)
+        return recipientPubKey.encrypt(
+            response.as_bytes(),
+            padding_asymmetric.OAEP(
+                mgf=padding_asymmetric.MGF1(algorithm=hashes.SHA256()),
+                algorithm=hashes.SHA256(),
+                label=None
+            )
+        )
+
     def AES_encrypt(self,
         response: Response,
         session_key: bytes,
