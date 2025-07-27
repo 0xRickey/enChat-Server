@@ -23,6 +23,9 @@ class Database:
             "PUBLIC_KEY": pubKey
         }
 
+    def get_user_pub_key(self, username: str) -> str:
+        return self.users[username]["PUBLIC_KEY"]
+
     def try_user_login(self, username: str, password: str):
         salt: str = self.users[username]["SALT"]
         saltedPassword: str = salt + password
