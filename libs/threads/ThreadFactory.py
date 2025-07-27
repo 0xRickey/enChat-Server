@@ -10,6 +10,7 @@ from libs.threads.CheckUsernameThread import CheckUsernameThread
 from libs.threads.RegisterUserThread import RegisterUserThread
 from libs.threads.LoginThread import LoginThread
 from libs.threads.LogoutThread import LogoutThread
+from libs.threads.GetPubKeyThread import GetPubKeyThread
 from libs.threads.MsgThread import MsgThread
 from libs.sessions.SessionsLog import SessionsLog
 from libs.response.ResponseLog import ResponseLog
@@ -79,7 +80,7 @@ class ThreadFactory:
                     encryptor
                 )
             case constants.GET_PUB_KEY:
-                return MsgThread(
+                return GetPubKeyThread(
                     request,
                     threadLock,
                     serverUdpSocket,
