@@ -1,11 +1,14 @@
 import json, hashlib, os
 
+from libs.Message import Message
+
 class Database:
     def __init__(self):
         with open("database.json", "r") as f:
             database: dict = json.loads(f.read())
 
         self.users: dict = database["USERS"]
+        self.chats: dict = database["CHATS"]
 
     def does_user_exist(self, username: str):
         return username in self.users.keys()
@@ -35,4 +38,16 @@ class Database:
 
     def write_to_db(self):
         with open("database.json", "w") as f:
-            f.write(json.dumps({"USERS": self.users}, indent=4))
+            f.write(json.dumps({"USERS": self.users, "CHATS": self.chats}, indent=4))
+
+    def add_msg(self, fromUser: str, toUser: str, msg: str):
+        chatKey = f"{fromUser}-{toUser}"
+        newMsg: Message = Message(f"{fromUser}: {msg}")
+
+        try:
+            chatMessages: list[(str, int)] = self.chats[chatKey]
+            chatMessages.append(newMsg.as_dict())
+        except KeyError:
+            self.chats[chatKey] = [newMsg.as_dict()]
+
+        self.write_to_db()
