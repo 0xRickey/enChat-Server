@@ -12,6 +12,7 @@ from libs.threads.LoginThread import LoginThread
 from libs.threads.LogoutThread import LogoutThread
 from libs.threads.GetPubKeyThread import GetPubKeyThread
 from libs.threads.MsgThread import MsgThread
+from libs.threads.ListMsgsThread import ListMsgsThread
 from libs.sessions.SessionsLog import SessionsLog
 from libs.response.ResponseLog import ResponseLog
 from libs.KeyManager import KeyManager
@@ -91,6 +92,16 @@ class ThreadFactory:
                 )
             case constants.MSG:
                 return MsgThread(
+                    request,
+                    threadLock,
+                    serverUdpSocket,
+                    sessionsLog,
+                    responseLog,
+                    keyManager,
+                    encryptor
+                )
+            case constants.LIST:
+                return ListMsgsThread(
                     request,
                     threadLock,
                     serverUdpSocket,
