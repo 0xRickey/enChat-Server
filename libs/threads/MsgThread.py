@@ -42,9 +42,10 @@ class MsgThread(Thread):
             toUser = self.request.get_payload()["TO_USER"]
             fromUser = self.request.get_payload()["FROM_USER"]
             msg = self.request.get_payload()["MESSAGE"]
+            timestamp = self.request.get_payload()["TIMESTAMP"]
 
             database = Database()
-            database.add_msg(fromUser, toUser, msg)
+            database.add_msg(fromUser, toUser, msg, timestamp)
 
             response: Response = ResponseFactory.create_response(
                 status=constants.MSG_SUCCESS,
