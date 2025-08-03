@@ -206,9 +206,4 @@ marimo/_static/
 marimo/_lsp/
 __marimo__/
 
-# Ignore the public and private key that is used for:
-# - signing
-# - verification
-# - encryption
-# - decryption
-keys/
+.DS_Store
