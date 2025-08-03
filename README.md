@@ -8,7 +8,9 @@ using salted hashes (a random 32-byte salt and SHA256 for hashing).
 ## Side Notes
 - The public and private key pair in the `keys/` directory are for demonstration. If this was a real appplication, these keys should NOT be in the git repository. NEVER commit key-pairs to git and github!
 
-- For this project I came up with my own protocol of communication and avoided using libraries like `request` that have inbuilt security features so that I could learn deeply about creating a secure application from scratch. 
+- For this project I came up with my own protocol of communication and avoided using libraries like `request` that have inbuilt security features so that I could learn deeply about creating a secure application from scratch.
+
+- This repository only has the server side code for enChat. To use the application, use follow the instructions to download and use the enChat client at: https://github.com/0xRickey/enChat-Client
 
 ## Installation
 
